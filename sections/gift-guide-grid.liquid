@@ -1,0 +1,71 @@
+{% comment %} Gift Guide – 6-tile Product Grid with popup hook {% endcomment %}
+<section class="gg-grid" data-section-id="{{ section.id }}">
+  <div class="container gg-grid__wrap">
+    {% for block in section.blocks %}
+      {% assign prod = all_products[block.settings.product] %}
+      {% if prod %}
+        <article class="gg-card" data-product-handle="{{ prod.handle }}" data-product-title="{{ prod.title | escape }}">
+          <a href="{{ prod.url }}" class="gg-card__link js-quick-open" aria-label="{{ prod.title }}">
+            {% if prod.featured_image %}
+              <img loading="lazy" class="gg-card__img" src="{{ prod.featured_image | image_url: width: 800 }}" alt="{{ prod.title | escape }}">
+            {% endif %}
+            <div class="gg-card__meta">
+              <h3 class="gg-card__title">{{ prod.title }}</h3>
+              <span class="gg-card__price">
+                {{ prod.price | money }}
+              </span>
+            </div>
+          </a>
+        </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <!-- modal root -->
+  <div class="gg-modal" hidden>
+    <div class="gg-modal__overlay js-quick-close"></div>
+    <div class="gg-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="gg-modal-title">
+      <button class="gg-modal__close js-quick-close" aria-label="Close">&times;</button>
+      <div class="gg-modal__content">
+        <div class="gg-modal__media"><img class="js-qv-image" alt=""></div>
+        <div class="gg-modal__info">
+          <h2 id="gg-modal-title" class="js-qv-title"></h2>
+          <p class="gg-modal__price js-qv-price"></p>
+          <div class="gg-modal__desc js-qv-desc"></div>
+
+          <form class="js-qv-form">
+            <div class="js-qv-options"></div>
+            <div class="gg-modal__actions">
+              <button type="submit" class="gg-btn gg-btn--primary">ADD TO CART</button>
+            </div>
+          </form>
+          <p class="js-qv-error gg-modal__error" hidden></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="{{ 'gift-guide.js' | asset_url }}"></script>
+  <link rel="stylesheet" href="{{ 'gift-guide.css' | asset_url }}">
+</section>
+
+{% schema %}
+{
+  "name": "Gift Guide Grid",
+  "settings": [
+    { "type": "product", "id": "soft_jacket", "label": "Soft Winter Jacket (auto-add item)" }
+  ],
+  "blocks": [
+    { "type": "product", "name": "Tile 1", "settings": [{ "type": "product", "id": "product", "label": "Product" }] },
+    { "type": "product", "name": "Tile 2", "settings": [{ "type": "product", "id": "product", "label": "Product" }] },
+    { "type": "product", "name": "Tile 3", "settings": [{ "type": "product", "id": "product", "label": "Product" }] },
+    { "type": "product", "name": "Tile 4", "settings": [{ "type": "product", "id": "product", "label": "Product" }] },
+    { "type": "product", "name": "Tile 5", "settings": [{ "type": "product", "id": "product", "label": "Product" }] },
+    { "type": "product", "name": "Tile 6", "settings": [{ "type": "product", "id": "product", "label": "Product" }] }
+  ],
+  "max_blocks": 6,
+  "presets": [{ "name": "Gift Guide Grid" }]
+}
+{% endschema %}
+
+{% javascript %}{% endjavascript %}
