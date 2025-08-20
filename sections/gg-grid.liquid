@@ -1,0 +1,73 @@
+{% comment %}
+  Gift Guide – Grid (new section)
+  - 6 product blocks (product pickers).
+  - Popup is rendered empty and filled by JS using product JSON exposed per tile.
+{% endcomment %}
+
+<section class="gg-grid" id="gg-grid-{{ section.id }}"
+  data-bonus-variant-id="
+    {%- if section.settings.bonus_product and section.settings.bonus_product.variants.size > 0 -%}
+      {{ section.settings.bonus_product.variants.first.id }}
+    {%- endif -%}
+  ">
+  <div class="gg-grid__inner page-width">
+    <div class="gg-grid__list">
+      {% for block in section.blocks %}
+        {% assign prod = block.settings.product %}
+        {% if prod %}
+          <article class="gg-card" data-handle="{{ prod.handle }}" {{ block.shopify_attributes }}>
+            <div class="gg-card__media">
+              {% if prod.featured_image %}
+                <img
+                  src="{{ prod.featured_image | img_url: '720x' }}"
+                  alt="{{ prod.title | escape }}"
+                  loading="lazy">
+              {% endif %}
+            </div>
+            <h3 class="gg-card__title">{{ prod.title }}</h3>
+            <p class="gg-card__price">
+              {{ prod.price | money }}
+            </p>
+
+            <!-- Expose product JSON for JS (modal) -->
+            <script type="application/json" data-product-json="{{ prod.handle }}">
+              {{ prod | json }}
+            </script>
+            <button class="gg-card__open" type="button" aria-label="Open {{ prod.title }}">View</button>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="gg-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="gg-modal__backdrop" data-close-modal></div>
+    <div class="gg-modal__dialog" role="document">
+      <button class="gg-modal__close" type="button" aria-label="Close" data-close-modal>×</button>
+      <div class="gg-modal__body">
+        <!-- JS will inject title, price, description, variant selectors, and Add to Cart -->
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG – Grid (6 products)",
+  "settings": [
+    { "type": "product", "id": "bonus_product", "label": "Bonus product to auto-add (Soft Winter Jacket)" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Product",
+      "limit": 6,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "GG – Grid (6)" }]
+}
+{% endschema %}

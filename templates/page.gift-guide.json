@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "gg-banner": { "type": "gg-banner", "settings": {} },
+    "gg-grid":   { "type": "gg-grid",   "settings": {}, "blocks": {
+      "1": { "type": "tile", "settings": {} },
+      "2": { "type": "tile", "settings": {} },
+      "3": { "type": "tile", "settings": {} },
+      "4": { "type": "tile", "settings": {} },
+      "5": { "type": "tile", "settings": {} },
+      "6": { "type": "tile", "settings": {} }
+    }, "block_order": ["1","2","3","4","5","6"] }
+  },
+  "order": ["gg-banner", "gg-grid"]
+}

@@ -1,0 +1,36 @@
+.page-width { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+/* Banner */
+.gg-banner { background: var(--bg, #fff); padding: 48px 0; }
+.gg-banner__eyebrow { text-transform: uppercase; letter-spacing: .08em; margin: 0 0 8px; }
+.gg-banner__title { font-size: clamp(28px, 5vw, 48px); line-height: 1.1; margin: 8px 0; }
+.gg-banner__subtitle { color: #555; max-width: 640px; margin: 12px 0 24px; }
+.gg-banner__ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.gg-btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border-radius: 999px; border: 2px solid #111; transition: transform .1s ease, box-shadow .2s ease; }
+.gg-btn--primary { background:#111; color:#fff; }
+.gg-btn--ghost { background:transparent; color:#111; }
+.gg-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 16px rgba(0,0,0,.08); }
+
+/* Grid */
+.gg-grid__list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 768px) { .gg-grid__list { grid-template-columns: repeat(2, 1fr); } }
+.gg-card { position: relative; cursor: pointer; background:#fff; border:1px solid #eee; padding: 8px; }
+.gg-card__media img { width: 100%; height: auto; display: block; }
+.gg-card__title { font-size: 16px; margin: 8px 0 4px; }
+.gg-card__price { color:#444; margin: 0 0 8px; }
+.gg-card__open { position:absolute; inset:0; opacity:0; }
+
+/* Modal */
+.gg-modal[aria-hidden="true"] { display:none; }
+.gg-modal { position: fixed; inset: 0; z-index: 999; }
+.gg-modal__backdrop { position:absolute; inset:0; background:rgba(0,0,0,.5); }
+.gg-modal__dialog { position: relative; margin: 6vh auto; max-width: 900px; background:#fff; border-radius: 12px; padding: 16px; width: calc(100% - 24px); }
+.gg-modal__close { position:absolute; top:8px; right:8px; border:0; background:#000; color:#fff; width:32px; height:32px; border-radius:50%; }
+.gg-modal__header { display:flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
+.gg-modal__content { display:grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 768px) { .gg-modal__content { grid-template-columns: 1fr; } }
+.gg-modal__media img { width: 100%; border-radius: 8px; }
+.gg-opt { display:block; margin: 8px 0; }
+.gg-opt__label { display:block; margin-bottom: 6px; font-size: 12px; text-transform: uppercase; letter-spacing:.06em; color:#666; }
+.gg-opt__select { width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:8px; background:#fff; }

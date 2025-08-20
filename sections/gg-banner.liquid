@@ -1,0 +1,51 @@
+{% comment %}
+  Gift Guide – Banner (new section)
+  - All texts editable in the customizer.
+  - Simple hover animation for the buttons (CSS handles it).
+{% endcomment %}
+
+<section class="gg-banner" style="--bg: {{ section.settings.bg_color }};">
+  <div class="gg-banner__inner page-width">
+    {% if section.settings.eyebrow != blank %}
+      <p class="gg-banner__eyebrow">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+
+    {% if section.settings.title != blank %}
+      <h1 class="gg-banner__title">{{ section.settings.title }}</h1>
+    {% endif %}
+
+    {% if section.settings.subtitle != blank %}
+      <p class="gg-banner__subtitle">{{ section.settings.subtitle }}</p>
+    {% endif %}
+
+    <div class="gg-banner__ctas">
+      {% if section.settings.primary_label != blank and section.settings.primary_link != blank %}
+        <a class="gg-btn gg-btn--primary" href="{{ section.settings.primary_link }}">
+          {{ section.settings.primary_label }}
+        </a>
+      {% endif %}
+      {% if section.settings.secondary_label != blank and section.settings.secondary_link != blank %}
+        <a class="gg-btn gg-btn--ghost" href="{{ section.settings.secondary_link }}">
+          {{ section.settings.secondary_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "GG – Banner",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "title", "label": "Title" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle" },
+    { "type": "text", "id": "primary_label", "label": "Primary button label" },
+    { "type": "url",  "id": "primary_link",  "label": "Primary button link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary button label" },
+    { "type": "url",  "id": "secondary_link",  "label": "Secondary button link" },
+    { "type": "color","id": "bg_color", "label": "Background color", "default": "#ffffff" }
+  ],
+  "presets": [{ "name": "GG – Banner" }]
+}
+{% endschema %}
